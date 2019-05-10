@@ -11,7 +11,7 @@ public class BallBehaviour : MonoBehaviour
 
     private bool gameStarted = false;
 
-    private float startingYVelocity = 14f;
+    private float startingYVelocity = 10f;
 
     // Start is called before the first frame update
     void Start()
