@@ -10,21 +10,42 @@ public class BlockBehaviour : MonoBehaviour
     [SerializeField]
     private int scoreWorth = 50;
 
+    [SerializeField]
+    int timesHit = 0;
+
+    [SerializeField]
+    int maxHits = 2;
+
+
+    // Initialization parameters
+
+    private string playerTag = "Player";
+
+    private string unbreakableBlockTag = "Unbreakable";
+
     private LevelManager levelManager = null;
 
     private GameStatus gameStatusManager = null;
 
     private void Start()
     {
-        levelManager = FindObjectOfType<LevelManager>();
         gameStatusManager = FindObjectOfType<GameStatus>();
 
-        levelManager.AddTrackedBlock();
+        CheckToTrackBlock();
     }
 
     private void OnCollisionEnter2D(Collision2D collider)
     {
-        if (collider.gameObject.tag == "Player")
+        if (collider.gameObject.tag == playerTag && gameObject.tag != unbreakableBlockTag)
+        {
+            HitBlock();
+        }
+    }
+
+    private void HitBlock()
+    {
+        timesHit ++;
+        if (timesHit >= maxHits)
         {
             DestroyBlock();
         }
@@ -44,4 +65,14 @@ public class BlockBehaviour : MonoBehaviour
         GameObject blockDestructionParticles = Instantiate(blockDestructionParticleEffect, transform.position, transform.rotation);
         Destroy(blockDestructionParticles, 2);
     }
+
+    private void CheckToTrackBlock()
+    {
+        levelManager = FindObjectOfType<LevelManager>();
+        if (tag != unbreakableBlockTag)
+        {
+            levelManager.AddTrackedBlock();
+        }
+    }
+
 }
