@@ -15,6 +15,7 @@ public class LoseCollider : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
+            Debug.Log("Player collided at: " + collider.transform.position);
             sceneLoaderScript.LoadGameOver();
         }
 
