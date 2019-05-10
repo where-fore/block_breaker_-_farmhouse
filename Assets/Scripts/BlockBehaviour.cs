@@ -4,32 +4,33 @@ using UnityEngine;
 
 public class BlockBehaviour : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject blockDestructionParticleEffect = null;
-
+    // Serialized Fields
     [SerializeField]
     private int scoreWorth = 50;
-
-    [SerializeField]
-    int timesHit = 0;
-
+    
     [SerializeField]
     int maxHits = 2;
 
+    // Config Fields
+    [SerializeField]
+    private Sprite[] damageLevelSprites = null;
+
+    [SerializeField]
+    private GameObject blockDestructionParticleEffect = null;
 
     // Initialization parameters
-
+    int timesHit = 0;
     private string playerTag = "Player";
-
     private string unbreakableBlockTag = "Unbreakable";
-
     private LevelManager levelManager = null;
-
     private GameStatus gameStatusManager = null;
+    private SpriteRenderer damageSpriteRenderer = null;
+    private string nameOfDamageObject = "Cracks";
 
     private void Start()
     {
         gameStatusManager = FindObjectOfType<GameStatus>();
+        FindDamageSpriteRenderer();
 
         CheckToTrackBlock();
     }
@@ -45,10 +46,22 @@ public class BlockBehaviour : MonoBehaviour
     private void HitBlock()
     {
         timesHit ++;
+
         if (timesHit >= maxHits)
         {
             DestroyBlock();
         }
+        else
+        {
+            DamageBlock();
+        }
+    }
+
+    private void DamageBlock()
+    {
+        int damageSpriteArrayIndex = Mathf.Clamp(timesHit, 0, damageLevelSprites.Length);
+        Sprite nextSprite = damageLevelSprites[damageSpriteArrayIndex];
+        damageSpriteRenderer.sprite = nextSprite;
     }
 
     private void DestroyBlock()
@@ -73,6 +86,13 @@ public class BlockBehaviour : MonoBehaviour
         {
             levelManager.AddTrackedBlock();
         }
+    }
+
+    private void FindDamageSpriteRenderer()
+    {
+        Transform childTransform = gameObject.transform.Find(nameOfDamageObject);
+
+        damageSpriteRenderer = childTransform.gameObject.GetComponent<SpriteRenderer>();
     }
 
 }
