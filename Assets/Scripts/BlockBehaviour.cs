@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class BlockBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnCollisionEnter2D(Collision2D collider)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (collider.gameObject.tag == "Player")
+        {
+            Destroy(gameObject);
+        }
     }
 }
