@@ -17,6 +17,8 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadStartScene()
     {
+        FindObjectOfType<GameManager>().DestroyGameManager();
+        
         SceneManager.LoadScene(startingSceneIndex);
     }
 

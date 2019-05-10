@@ -8,11 +8,17 @@ public class GameManager : MonoBehaviour
     {
         if (FindObjectsOfType<GameManager>().Length > 1)
         {
-            Destroy(gameObject);
+            DestroyGameManager();
         }
         else
         {
             DontDestroyOnLoad(gameObject);
         }
+    }
+
+    public void DestroyGameManager()
+    {
+        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
