@@ -9,6 +9,10 @@ public class BallBehaviour : MonoBehaviour
     [SerializeField]
     PaddleBehaviour paddle = null;
 
+    private bool gameStarted = false;
+
+    private float startingYVelocity = 14f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +20,28 @@ public class BallBehaviour : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        if (!gameStarted)
+        {
+            SnapBallToPaddle();
+        }
+
+        if (!gameStarted && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            gameStarted = true;
+            LauchBall();
+        }
+    }
+
+    private void LauchBall()
+    {
+        float launchYVelocity = startingYVelocity;
+        float launchXVelocity = paddle.GetComponent<Rigidbody2D>().velocity.x;
+
+        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2 (launchXVelocity, launchYVelocity);
+    }
+
+    private void SnapBallToPaddle()
     {
         Vector2 paddlePos = new Vector2(paddle.transform.position.x, paddle.transform.position.y);
         transform.position = paddlePos + paddleToBallOffset;

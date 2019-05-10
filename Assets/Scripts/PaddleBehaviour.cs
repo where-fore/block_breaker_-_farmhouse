@@ -17,6 +17,11 @@ public class PaddleBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SnapPaddleToMouse();
+    }
+
+    private void SnapPaddleToMouse()
+    {
         float screenHeightInUnits = Camera.main.orthographicSize * 2;
         float screenWidthInUnits = screenHeightInUnits * aspectRatio;
 
@@ -25,6 +30,7 @@ public class PaddleBehaviour : MonoBehaviour
         float screenMinX = 0f + halfOfPaddleWidth;
         float screenMaxX = screenWidthInUnits - halfOfPaddleWidth;
         float mouseXCoordinateInScreenBounds = Mathf.Clamp(mouseXCoordinate, screenMinX, screenMaxX);
+        
 
         transform.position = new Vector2 (mouseXCoordinateInScreenBounds, transform.position.y);
     }
