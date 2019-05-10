@@ -119,3 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca6f79101bc143439de96a4bfc99580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockDestructionParticleEffect: {fileID: 100000, guid: 7d846c02296ef4dc4abff04ce3e5262c,
+    type: 3}
+  scoreWorth: 50

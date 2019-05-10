@@ -5,6 +5,9 @@ using UnityEngine;
 public class BlockBehaviour : MonoBehaviour
 {
     [SerializeField]
+    private GameObject blockDestructionParticleEffect = null;
+
+    [SerializeField]
     private int scoreWorth = 50;
 
     private LevelManager levelManager = null;
@@ -31,6 +34,14 @@ public class BlockBehaviour : MonoBehaviour
     {
         gameStatusManager.AddScore(scoreWorth);
         levelManager.RemoveTrackedBlock();
+        TriggerParticlesVFX();
+
         Destroy(gameObject);
+    }
+
+    private void TriggerParticlesVFX()
+    {
+        GameObject blockDestructionParticles = Instantiate(blockDestructionParticleEffect, transform.position, transform.rotation);
+        Destroy(blockDestructionParticles, 2);
     }
 }
