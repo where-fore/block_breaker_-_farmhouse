@@ -4,31 +4,37 @@ using UnityEngine;
 
 public class BallBehaviour : MonoBehaviour
 {
+    // Configuration initialization
+    private float startingYVelocity = 10f;
+
+
+    // Variable initialization
     private Vector2 paddleToBallOffset = new Vector2();
 
-    [SerializeField]
+
+    // Object reference initialization
+    private LevelManager levelManager = null;
+    
     PaddleBehaviour paddle = null;
-
-    private bool gameStarted = false;
-
-    private float startingYVelocity = 10f;
 
     // Start is called before the first frame update
     void Start()
     {
-        paddleToBallOffset = transform.position - paddle.transform.position;    }
-
+        paddle = FindObjectOfType<PaddleBehaviour>();
+        paddleToBallOffset = transform.position - paddle.transform.position;
+        levelManager = FindObjectOfType<LevelManager>();
+    }
     // Update is called once per frame
     void Update()
     {
-        if (!gameStarted)
+        if (!levelManager.levelStarted)
         {
             SnapBallToPaddle();
         }
 
-        if (!gameStarted && Input.GetKeyDown(KeyCode.Mouse0))
+        if (!levelManager.levelStarted && Input.GetKeyDown(KeyCode.Mouse0))
         {
-            gameStarted = true;
+            levelManager.StartLevel();
             LauchBall();
         }
     }
