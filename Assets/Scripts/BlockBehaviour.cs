@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class BlockBehaviour : MonoBehaviour
 {
+    [SerializeField]
+    private int scoreWorth = 50;
+
     private LevelManager levelManager = null;
+
+    private GameStatus gameStatusManager = null;
 
     private void Start()
     {
         levelManager = FindObjectOfType<LevelManager>();
+        gameStatusManager = FindObjectOfType<GameStatus>();
 
         levelManager.AddTrackedBlock();
     }
@@ -23,6 +29,7 @@ public class BlockBehaviour : MonoBehaviour
 
     private void DestroyBlock()
     {
+        gameStatusManager.AddScore(scoreWorth);
         levelManager.RemoveTrackedBlock();
         Destroy(gameObject);
     }
