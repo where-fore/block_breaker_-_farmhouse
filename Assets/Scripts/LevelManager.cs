@@ -7,9 +7,11 @@ public class LevelManager : MonoBehaviour
 
     public bool levelStarted = false;
 
-    private int blocksTracked = 0;
+    public int blocksTracked = 0;
 
-    private int ballsTracked = 0;
+    public int ballsTracked = 0;
+
+    public int maxBalls = 5;
 
     private SceneLoader sceneLoaderManager = null;
 

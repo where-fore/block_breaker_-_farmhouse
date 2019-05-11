@@ -19370,6 +19370,7 @@ MonoBehaviour:
   damageLevelSprites: []
   blockDestructionParticleEffect: {fileID: 100000, guid: 7d846c02296ef4dc4abff04ce3e5262c,
     type: 3}
+  ballToSpawn: {fileID: 0}
 --- !u!212 &4694207801050446285
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -19673,16 +19674,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6051605731207187774, guid: b9cce805f86323d47a0541d8eeae7605,
         type: 3}
-      propertyPath: m_Offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6051605731207187774, guid: b9cce805f86323d47a0541d8eeae7605,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6051605731207187774, guid: b9cce805f86323d47a0541d8eeae7605,
-        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -19764,11 +19755,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 720132002}
     m_Modifications:
-    - target: {fileID: 4966380773773413883, guid: 81e672e88800fe448a270633f6a66f8a,
-        type: 3}
-      propertyPath: m_Name
-      value: Block
-      objectReference: {fileID: 0}
     - target: {fileID: 4966380773773413881, guid: 81e672e88800fe448a270633f6a66f8a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19823,6 +19809,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966380773773413883, guid: 81e672e88800fe448a270633f6a66f8a,
+        type: 3}
+      propertyPath: m_Name
+      value: Block
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81e672e88800fe448a270633f6a66f8a, type: 3}

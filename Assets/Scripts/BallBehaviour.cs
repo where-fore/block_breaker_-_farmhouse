@@ -6,7 +6,7 @@ public class BallBehaviour : MonoBehaviour
 {
     // Configuration initialization
     [SerializeField]
-    private float startingYVelocity = 10f;
+    private float startingYVelocity = 13f;
     [SerializeField]
     private float startingXVelocity = 10f;
     [SerializeField]
@@ -30,8 +30,6 @@ public class BallBehaviour : MonoBehaviour
         startingPosition = new Vector2(transform.position.x, transform.position.y);
 
         levelManager.AddTrackedBall();
-
-        rigidBody2DComponent.bodyType = RigidbodyType2D.Kinematic;
 
         if (levelManager.levelStarted)
         {
@@ -60,15 +58,11 @@ public class BallBehaviour : MonoBehaviour
 
     public void LauchBall()
     {
-        Debug.Log("Ball Launched");
-        rigidBody2DComponent.bodyType = RigidbodyType2D.Dynamic;
         rigidBody2DComponent.velocity = new Vector2 (0, startingYVelocity);
     }
 
     public void RandomlyLaunchBall()
     {
-        Debug.Log("Ball Randomly Launched");
-        rigidBody2DComponent.bodyType = RigidbodyType2D.Dynamic;
         float randomLaunchXVelocity = Random.Range(startingXVelocity - startingRandomTweakSize, startingXVelocity + startingRandomTweakSize);
         float randomLaunchYVelocity = Random.Range(startingYVelocity - startingRandomTweakSize, startingYVelocity + startingRandomTweakSize);
 

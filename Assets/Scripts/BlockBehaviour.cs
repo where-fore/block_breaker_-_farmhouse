@@ -54,7 +54,6 @@ public class BlockBehaviour : MonoBehaviour
         if (timesHit >= maxHits)
         {
             DestroyBlock();
-            SpawnNewBall();
         }
         else
         {
@@ -102,7 +101,10 @@ public class BlockBehaviour : MonoBehaviour
 
     private void SpawnNewBall()
     {
-        GameObject newBall = Instantiate(ballToSpawn, transform.position, transform.rotation);
+        if (levelManager.ballsTracked < levelManager.maxBalls)
+        {
+            GameObject newBall = Instantiate(ballToSpawn, transform.position, transform.rotation);
+        }
     }
 
 }
