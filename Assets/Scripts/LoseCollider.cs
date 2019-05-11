@@ -6,18 +6,33 @@ public class LoseCollider : MonoBehaviour
 {
     private SceneLoader sceneLoaderScript = null;
 
-    void Awake()
+    private LevelManager levelManager = null;
+
+    private void Start()
     {
-        sceneLoaderScript = GameObject.FindGameObjectWithTag("Scene Loader").GetComponent<SceneLoader>();
+        InitializeComponents();
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Player")
         {
-            Debug.Log("Player collided at: " + collider.transform.position);
-            sceneLoaderScript.LoadGameOver();
-        }
+            levelManager.RemoveTrackedBall();
 
+            if (levelManager.CheckIfZeroBalls())
+            {
+                levelManager.LoseLevel();
+            }
+
+            Destroy(collider.gameObject, 1f);
+        }
     }
+
+
+    private void InitializeComponents()
+    {
+        levelManager = FindObjectOfType<LevelManager>();
+        sceneLoaderScript = GameObject.FindGameObjectWithTag("Scene Loader").GetComponent<SceneLoader>();
+    }
+
 }

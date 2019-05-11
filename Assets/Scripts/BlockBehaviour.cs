@@ -17,6 +17,9 @@ public class BlockBehaviour : MonoBehaviour
     [SerializeField]
     private GameObject blockDestructionParticleEffect = null;
 
+    [SerializeField]
+    private GameObject ballToSpawn = null;
+
     // Initialization parameters
     int timesHit = 0;
     private string playerTag = "Player";
@@ -51,6 +54,7 @@ public class BlockBehaviour : MonoBehaviour
         if (timesHit >= maxHits)
         {
             DestroyBlock();
+            SpawnNewBall();
         }
         else
         {
@@ -94,6 +98,11 @@ public class BlockBehaviour : MonoBehaviour
         Transform childTransform = gameObject.transform.Find(nameOfDamageObject);
 
         damageSpriteRenderer = childTransform.gameObject.GetComponent<SpriteRenderer>();
+    }
+
+    private void SpawnNewBall()
+    {
+        GameObject newBall = Instantiate(ballToSpawn, transform.position, transform.rotation);
     }
 
 }

@@ -9,11 +9,21 @@ public class LevelManager : MonoBehaviour
 
     private int blocksTracked = 0;
 
+    private int ballsTracked = 0;
+
     private SceneLoader sceneLoaderManager = null;
 
     private void Start()
     {
         sceneLoaderManager = FindObjectOfType<SceneLoader>();
+    }
+
+    private void Update()
+    {
+        if (blocksTracked == 0 && levelStarted)
+        {   
+            WinLevel();
+        }
     }
 
     public void StartLevel()
@@ -30,13 +40,33 @@ public class LevelManager : MonoBehaviour
     {
         blocksTracked --;
     }
-    
-    private void Update()
+
+    public void AddTrackedBall()
     {
-        if (blocksTracked == 0 && levelStarted)
-        {
-            sceneLoaderManager.LoadNextScene();
-            levelStarted = false;
-        }
+        ballsTracked ++;
+    }
+
+    public void RemoveTrackedBall()
+    {
+        ballsTracked --;
+    }
+
+    public bool CheckIfZeroBalls()
+    {
+        bool answer = (ballsTracked == 0);
+        return answer;
+    }
+
+
+    public void WinLevel()
+    {
+        sceneLoaderManager.LoadNextScene();
+        levelStarted = false;
+    }
+
+    public void LoseLevel()
+    {
+        sceneLoaderManager.LoadGameOver();
+        levelStarted = false;
     }
 }

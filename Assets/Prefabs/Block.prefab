@@ -124,6 +124,8 @@ MonoBehaviour:
   damageLevelSprites: []
   blockDestructionParticleEffect: {fileID: 100000, guid: 7d846c02296ef4dc4abff04ce3e5262c,
     type: 3}
+  ballToSpawn: {fileID: 6051605731207187773, guid: b9cce805f86323d47a0541d8eeae7605,
+    type: 3}
 --- !u!1 &5138596068163181505
 GameObject:
   m_ObjectHideFlags: 0
