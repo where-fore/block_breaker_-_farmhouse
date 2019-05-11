@@ -7,9 +7,8 @@ public class BlockBehaviour : MonoBehaviour
     // Serialized Fields
     [SerializeField]
     private int scoreWorth = 50;
-    
-    [SerializeField]
-    int maxHits = 2;
+
+    int maxHits = 0;
 
     // Config Fields
     [SerializeField]
@@ -33,6 +32,8 @@ public class BlockBehaviour : MonoBehaviour
         FindDamageSpriteRenderer();
 
         CheckToTrackBlock();
+
+        maxHits = damageLevelSprites.Length + 1;
     }
 
     private void OnCollisionEnter2D(Collision2D collider)
@@ -59,7 +60,7 @@ public class BlockBehaviour : MonoBehaviour
 
     private void DamageBlock()
     {
-        int damageSpriteArrayIndex = Mathf.Clamp(timesHit, 0, damageLevelSprites.Length);
+        int damageSpriteArrayIndex = Mathf.Clamp(timesHit - 1, 0, damageLevelSprites.Length);
         Sprite nextSprite = damageLevelSprites[damageSpriteArrayIndex];
         damageSpriteRenderer.sprite = nextSprite;
     }
