@@ -11,3 +11,20 @@ Other possible solutions:
     > Add spin to ball and minor friction to the scene
     > Add small gravity
 ----------------------------------------------------------
+
+
+
+Assets
+~~~~~~~
+Player ball - fireball / spell
+Paddle - mage / dwarf
+Block Sounds - hits + destructions
+Music (dungeons of dredmor potentially)
+
+
+Features
+~~~~~~~~~~
+Ball Physics / Gameplay
+    > Ball affected by wasd
+
+    > Do not lose on ball leaving play, respawn ball instead for multiple plays

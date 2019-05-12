@@ -11,7 +11,8 @@ public class PaddleBehaviour : MonoBehaviour
     private Vector2 paddleStartingPosition = new Vector2(0,0);
 
     private LevelManager levelManager = null;
-    private BallBehaviour[] startingBalls = null;
+
+    //public List<BallBehaviour> allBalls = null;
 
     // Start is called before the first frame update
     void Start()
@@ -25,21 +26,29 @@ public class PaddleBehaviour : MonoBehaviour
     {
         SnapPaddleToMouse();
 
+        SnapBallsToPaddle();
 
-        if (!levelManager.levelStarted)
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            foreach (BallBehaviour ball in startingBalls)
+            if (!levelManager.levelStarted)
             {
-                SnapBallToPaddle(ball, ball.startingPosition);
+                levelManager.StartLevel();
             }
-        }
 
-        if (!levelManager.levelStarted && Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            levelManager.StartLevel();
-            foreach (BallBehaviour ball in startingBalls)
+            foreach (BallBehaviour ball in levelManager.allBalls)
             {
                 ball.LauchBall();
+            }
+        }
+    }
+
+    private void SnapBallsToPaddle()
+    {
+        foreach (BallBehaviour ball in levelManager.allBalls)
+        {
+            if (!ball.isLaunched())
+            {
+                SnapBallToPaddle(ball, levelManager.startingBall.transform.position);
             }
         }
     }
@@ -73,7 +82,6 @@ public class PaddleBehaviour : MonoBehaviour
 
     private void InitializeComponents()
     {
-        startingBalls = FindObjectsOfType<BallBehaviour>();
         levelManager = FindObjectOfType<LevelManager>();
     }
 }

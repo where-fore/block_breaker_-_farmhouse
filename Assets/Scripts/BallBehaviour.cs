@@ -13,10 +13,9 @@ public class BallBehaviour : MonoBehaviour
     private float startingRandomTweakSize = 5f;
 
     [SerializeField]
-    private float velocityRandomTweakSize = 0.3f;
+    private float velocityRandomTweakSize = 0.35f;
 
-    // Config
-    public Vector2 startingPosition = new Vector2(0, 0);
+    private bool launched = false;
 
 
     // Object reference initialization
@@ -27,19 +26,27 @@ public class BallBehaviour : MonoBehaviour
     void Start()
     {
         InitializeComponents();
-        startingPosition = new Vector2(transform.position.x, transform.position.y);
 
         levelManager.AddTrackedBall();
 
+        launched = false;
+
+    /* Use me if you want the ball to launch instantly after spawning
         if (levelManager.levelStarted)
         {
             RandomlyLaunchBall();
         }
+    */
     }
 
     void Update()
     {
 
+    }
+
+    void OnDestroy()
+    {
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -58,6 +65,7 @@ public class BallBehaviour : MonoBehaviour
 
     public void LauchBall()
     {
+        launched = true;
         rigidBody2DComponent.velocity = new Vector2 (0, startingYVelocity);
     }
 
@@ -66,6 +74,7 @@ public class BallBehaviour : MonoBehaviour
         float randomLaunchXVelocity = Random.Range(startingXVelocity - startingRandomTweakSize, startingXVelocity + startingRandomTweakSize);
         float randomLaunchYVelocity = Random.Range(startingYVelocity - startingRandomTweakSize, startingYVelocity + startingRandomTweakSize);
 
+        launched = true;
         rigidBody2DComponent.velocity = new Vector2 (randomLaunchXVelocity, randomLaunchYVelocity);
     }
 
@@ -73,5 +82,10 @@ public class BallBehaviour : MonoBehaviour
     {
         levelManager = FindObjectOfType<LevelManager>();
         rigidBody2DComponent = GetComponent<Rigidbody2D>();
+    }
+
+    public bool isLaunched()
+    {
+        return launched;
     }
 }

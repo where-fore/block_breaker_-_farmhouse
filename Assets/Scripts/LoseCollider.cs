@@ -17,9 +17,10 @@ public class LoseCollider : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
-            levelManager.RemoveTrackedBall();
 
-            if (levelManager.CheckIfZeroBalls())
+            levelManager.RemoveTrackedBall(collider.gameObject.GetComponent<BallBehaviour>());
+
+            if (levelManager.CheckIfZeroBalls() && levelManager.loseGameIfLastBallCollides)
             {
                 levelManager.LoseLevel();
             }
