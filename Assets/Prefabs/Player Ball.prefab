@@ -97,7 +97,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -133,7 +133,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contactClip: {fileID: 8300000, guid: 8d587c22072d31c4fa9647d08c4376c6, type: 3}
-  summonClip: {fileID: 8300000, guid: d9003e866a9ab2a42b8a6cc1be808d16, type: 3}
   launchClip: {fileID: 8300000, guid: 2edc602e2be3efd409462887f5e45b07, type: 3}
 --- !u!82 &820475750447833370
 AudioSource:

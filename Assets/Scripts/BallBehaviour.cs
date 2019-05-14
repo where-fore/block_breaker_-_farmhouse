@@ -7,12 +7,14 @@ public class BallBehaviour : MonoBehaviour
     // Configuration initialization
 
     [SerializeField]
-    private AudioClip contactClip;
+    private AudioClip contactClip = null;
 
     [SerializeField]
-    private AudioClip launchClip;
+    private AudioClip launchClip = null;
     //[SerializeField]
-    private float startingYVelocity = 14f;
+    private float startingYVelocity = 9f;
+
+    private float maxStartingYVelocity = 20f;
     //[SerializeField]
     private float startingXVelocity = 10f;
     //[SerializeField]
@@ -20,6 +22,10 @@ public class BallBehaviour : MonoBehaviour
 
     //[SerializeField]
     private float velocityRandomTweakSize = 0.35f;
+
+    private float chargingTorqueForce = 0.01f;
+
+    private float chargingVelocityForce = 0.425f;
 
     private bool launched = false;
 
@@ -49,6 +55,10 @@ public class BallBehaviour : MonoBehaviour
 
     void Update()
     {
+        if (!launched)
+        {
+            ChargeBall();
+        }
 
     }
 
@@ -59,8 +69,29 @@ public class BallBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Ball collided with: " + collision.gameObject.name);
         TweakVelocity();
         PlayContactSound();
+    }
+
+    private void ChargeBall()
+    {
+        RotateBall();
+        if (startingYVelocity < maxStartingYVelocity)
+        {
+            startingYVelocity = startingYVelocity + chargingVelocityForce;
+
+            if (startingYVelocity > maxStartingYVelocity)
+            {
+                startingYVelocity = maxStartingYVelocity;
+            }
+        }
+
+    }
+
+    private void RotateBall()
+    {
+        rigidBody2DComponent.AddTorque(chargingTorqueForce, ForceMode2D.Impulse);
     }
 
     private void TweakVelocity()
