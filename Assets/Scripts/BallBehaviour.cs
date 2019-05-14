@@ -5,14 +5,20 @@ using UnityEngine;
 public class BallBehaviour : MonoBehaviour
 {
     // Configuration initialization
-    [SerializeField]
-    private float startingYVelocity = 13f;
-    [SerializeField]
-    private float startingXVelocity = 10f;
-    [SerializeField]
-    private float startingRandomTweakSize = 5f;
 
     [SerializeField]
+    private AudioClip contactClip;
+
+    [SerializeField]
+    private AudioClip launchClip;
+    //[SerializeField]
+    private float startingYVelocity = 14f;
+    //[SerializeField]
+    private float startingXVelocity = 10f;
+    //[SerializeField]
+    private float startingRandomTweakSize = 5f;
+
+    //[SerializeField]
     private float velocityRandomTweakSize = 0.35f;
 
     private bool launched = false;
@@ -21,6 +27,8 @@ public class BallBehaviour : MonoBehaviour
     // Object reference initialization
     private LevelManager levelManager = null;
     private Rigidbody2D rigidBody2DComponent = null;
+
+    private AudioSource myAudioSource = null;
 
 
     void Start()
@@ -52,6 +60,7 @@ public class BallBehaviour : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         TweakVelocity();
+        PlayContactSound();
     }
 
     private void TweakVelocity()
@@ -67,6 +76,7 @@ public class BallBehaviour : MonoBehaviour
     {
         launched = true;
         rigidBody2DComponent.velocity = new Vector2 (0, startingYVelocity);
+        PlayLaunchSound();
     }
 
     public void RandomlyLaunchBall()
@@ -78,10 +88,26 @@ public class BallBehaviour : MonoBehaviour
         rigidBody2DComponent.velocity = new Vector2 (randomLaunchXVelocity, randomLaunchYVelocity);
     }
 
+    private void PlayContactSound()
+    {
+        PlayOneShot(contactClip);
+    }
+
+    private void PlayLaunchSound()
+    {
+        PlayOneShot(launchClip);
+    }
+
+    private void PlayOneShot(AudioClip clip)
+    {
+        myAudioSource.PlayOneShot(clip);
+    }
+
     private void InitializeComponents()
     {
         levelManager = FindObjectOfType<LevelManager>();
         rigidBody2DComponent = GetComponent<Rigidbody2D>();
+        myAudioSource = GetComponent<AudioSource>();
     }
 
     public bool isLaunched()
