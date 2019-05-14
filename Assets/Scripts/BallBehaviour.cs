@@ -14,7 +14,7 @@ public class BallBehaviour : MonoBehaviour
     //[SerializeField]
     private float startingYVelocity = 9f;
 
-    private float maxStartingYVelocity = 20f;
+    private float maxStartingYVelocity = 25f;
     //[SerializeField]
     private float startingXVelocity = 10f;
     //[SerializeField]
@@ -69,7 +69,7 @@ public class BallBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Ball collided with: " + collision.gameObject.name);
+        //Debug.Log("Ball collided with: " + collision.gameObject.name);
         TweakVelocity();
         PlayContactSound();
     }

@@ -6,7 +6,7 @@ public class PaddleBehaviour : MonoBehaviour
 {
     private float aspectRatio = (4f/3f);
 
-    private float halfOfPaddleWidth = 2f/2f;
+    private float paddleWidth = 1f;
 
     private Vector2 paddleStartingPosition = new Vector2(0,0);
 
@@ -72,8 +72,10 @@ public class PaddleBehaviour : MonoBehaviour
 
         float mouseXCoordinate = Input.mousePosition.x / (Screen.width / screenWidthInUnits);
 
+        float halfOfPaddleWidth = paddleWidth / 2;
         float screenMinX = 0f + halfOfPaddleWidth;
         float screenMaxX = screenWidthInUnits - halfOfPaddleWidth;
+        
         float mouseXCoordinateInScreenBounds = Mathf.Clamp(mouseXCoordinate, screenMinX, screenMaxX);
         
 
